@@ -1,0 +1,127 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Setup font
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
+
+// Setup theme
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/**
+ ** Global configuration
+ **/
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+// Toobar
+.actions-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+    Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+/**
+ ** All views
+ **/
+
+.view {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  // Size of header.
+  min-height: calc(100vh - 64px);
+
+  box-sizing: border-box;
+}
+
+/**
+ ** Login / Register forms mutual styles
+ **/
+
+.view::before,
+.view::after {
+  box-flex: 1;
+  flex-grow: 1;
+  content: "";
+  display: block;
+  height: 24px;
+}
+
+.form-box {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.form-wrapper {
+  padding: 48px 40px 36px;
+}
+
+.form-header {
+  text-align: center;
+}
+
+.form-h1 {
+  color: #202124;
+  padding-bottom: 0;
+  padding-top: 16px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3333;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.form-subtext {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  line-height: 1.5;
+  padding-bottom: 0;
+  padding-top: 8px;
+}
+
+.form-core {
+  padding: 16px 0 24px;
+  width: 100%;
+}
+
+.full-width-field {
+  width: 100%;
+}
+
+.full-width-input {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: auto;
+  position: relative;
+}
+
+.form-footer {
+  display: flex;
+  margin-left: -8px;
+}
+
+.form-action {
+  display: block;
+}
+
+.form-action > .special-padding-mat-button {
+  padding: 0 8px;
+}

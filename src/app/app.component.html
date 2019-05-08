@@ -1,0 +1,21 @@
+<!-- The content below is only a placeholder and can be replaced. -->
+
+<mat-toolbar color="primary" id="toolbar">
+  <a mat-button id="toolbar-title" routerLink=".">Feaded</a>
+  <span id="toolbar-remaining-space"></span>
+  <a mat-icon-button routerLink=".">
+    <mat-icon [matMenuTriggerFor]="user">account_box</mat-icon>
+  </a>
+  <mat-menu #user="matMenu">
+    <button mat-menu-item>
+      <mat-icon>account_circle</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Disconnect</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

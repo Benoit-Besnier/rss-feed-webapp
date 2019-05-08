@@ -1,0 +1,46 @@
+<div class="view">
+  <div class="form-box">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h1 class="form-h1">Register</h1>
+        <div class="form-subtext">Setup a new Feeded account</div>
+      </div>
+      <div class="form-core">
+        <mat-form-field class="full-width-field">
+          <input matInput placeholder="Username" class="full-width-input" />
+        </mat-form-field>
+        <mat-form-field class="full-width-field">
+          <input
+            matInput
+            placeholder="Password"
+            class="full-width-input"
+            type="password"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width-field">
+          <input
+            matInput
+            placeholder="Confirm password"
+            class="full-width-input"
+            type="password"
+          />
+        </mat-form-field>
+      </div>
+      <div class="form-footer">
+        <div class="form-action signin-link">
+          <a
+            mat-button
+            class="special-padding-mat-button"
+            color="primary"
+            routerLink="/login"
+            >Connect to your account</a
+          >
+        </div>
+        <span class="actions-remaining-space"></span>
+        <button id="form-action form-submit" mat-flat-button color="primary">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
