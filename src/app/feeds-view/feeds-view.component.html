@@ -1,0 +1,26 @@
+<div class="view no-height">
+  <mat-accordion class="list-container">
+    <div class="vertical-padding">
+      <mat-expansion-panel class="feed-item" *ngFor="let feed of feeds">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="bigger-title"
+            ><a
+              class="neutral-color-link"
+              [routerLink]="['/feeds/', feed.uuid]"
+              >{{ feed.title }}</a
+            ></mat-panel-title
+          >
+          <mat-panel-description class="right-content">
+            Last updated: {{ feed.autoUpdatedDate | date: "medium" }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+          class="last-entries"
+          *ngFor="let entry of (feed.entries | slice: 0:3)"
+        >
+          <a href="{{entry.uri}}">{{ entry.title }}</a>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+</div>

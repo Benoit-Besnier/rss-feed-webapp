@@ -1,0 +1,30 @@
+.no-height::before,
+.no-height::after {
+  height: auto;
+}
+
+.vertical-padding {
+  margin: 10px 0;
+}
+
+.list-container {
+  min-height: inherit;
+}
+
+.feed-item {
+  margin: 5px 8px;
+}
+
+.bigger-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.right-content {
+  flex-direction: row-reverse;
+}
+
+.neutral-color-link {
+  text-decoration: none;
+  color: #606060;
+}
