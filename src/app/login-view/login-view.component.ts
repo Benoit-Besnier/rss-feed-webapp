@@ -16,6 +16,7 @@ import { MatInputModule } from "@angular/material/input";
 
 import { UserSessionService } from "../services/user-session.service";
 import { LoginClientService } from "./login.service";
+import { UserDetailsService } from "../services/user-details.service";
 
 import { UserSession } from "../entities/UserSession";
 
@@ -26,9 +27,10 @@ import { UserSession } from "../entities/UserSession";
 })
 export class LoginViewComponent implements OnInit {
   constructor(
-    private loginClient: LoginClientService,
     private snackBar: MatSnackBar,
-    private session: UserSessionService
+    private loginClient: LoginClientService,
+    private session: UserSessionService,
+    private details: UserDetailsService
   ) {}
 
   loginForm = new FormGroup({
@@ -56,6 +58,7 @@ export class LoginViewComponent implements OnInit {
         if (typeResponse == 2 && this.session.isSessionValid(reponse.body)) {
           this.snackBar.open("Login succeed.", "", { duration: 2000 });
           this.session.connect(reponse.body);
+          this.details.sync(this.session.getSession());
         } else {
           this.snackBar.open(
             "Login failed. Something wrong happend, please retry.",

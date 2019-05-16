@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 
 import { MatSnackBar } from "@angular/material";
 
 import { UserClientService } from "../client/user.service";
+import { UserSessionService } from "./user-session.service";
 
 import { UserSession } from "../entities/UserSession";
 import { UserDetails } from "../entities/UserDetails";
@@ -16,6 +17,7 @@ export class UserDetailsService {
 
   constructor(
     private userClient: UserClientService,
+    private sessionClient: UserSessionService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -31,6 +33,30 @@ export class UserDetailsService {
     );
   }
 
+  public update(): void {
+    this.userClient
+      .putUserDetails(this.sessionClient.getSessionToken(), this.details)
+      .subscribe(
+        (response: HttpResponse<any>) => {
+          console.log(response);
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      );
+  }
+
+  public deleteInPreferred(uuid: string): void {
+    this.details.preferredFeeds.splice(
+      this.details.preferredFeeds.indexOf(uuid),
+      1
+    );
+  }
+
+  public addInPreferred(uuid: string): void {
+    this.details.preferredFeeds.push(uuid);
+  }
+
   public getDetails(): UserDetails {
     return this.details;
   }
@@ -42,6 +68,7 @@ export class UserDetailsService {
   public areDetailsValids(details: UserDetails): boolean {
     return (
       details != null &&
+      details != undefined &&
       details.username != null &&
       details.username != "" &&
       details.roles != null &&

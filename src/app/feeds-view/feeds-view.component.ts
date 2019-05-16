@@ -4,9 +4,10 @@ import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material";
 
 import { FeedsClientService } from "../client/feeds.service";
+import { UserDetailsService } from "../services/user-details.service";
+import { UserSessionService } from "../services/user-session.service";
 
 import { Feed } from "../entities/Feed";
-import { UserDetailsService } from "../services/user-details.service";
 
 @Component({
   selector: "app-feeds-view",
@@ -18,6 +19,7 @@ export class FeedsViewComponent implements OnInit {
 
   constructor(
     private feedsClient: FeedsClientService,
+    private session: UserSessionService,
     private details: UserDetailsService,
     private snackBar: MatSnackBar
   ) {}
@@ -38,12 +40,25 @@ export class FeedsViewComponent implements OnInit {
     );
   }
 
-  public isPreferred(uuid: string) {
+  public isPreferred(uuid: string): boolean {
     let details = this.details.getDetails();
 
     if (this.details.areDetailsValids(details)) {
       return details.preferredFeeds.some(preferred => preferred == uuid);
     }
     return false;
+  }
+
+  public isAuthenticated(): boolean {
+    return this.session.isSessionValid(this.session.getSession());
+  }
+
+  public togglePreferred(uuid: string): void {
+    if (this.isPreferred(uuid)) {
+      this.details.deleteInPreferred(uuid);
+    } else {
+      this.details.addInPreferred(uuid);
+    }
+    this.details.update();
   }
 }

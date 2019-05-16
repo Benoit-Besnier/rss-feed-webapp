@@ -6,6 +6,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 
 import { UserSessionService } from "./services/user-session.service";
+import { UserDetailsService } from "./services/user-details.service";
+
 import { UserSession } from "./entities/UserSession";
 
 @Component({
@@ -16,7 +18,10 @@ import { UserSession } from "./entities/UserSession";
 export class AppComponent {
   title = "rss-feed-webapp";
 
-  constructor(public session: UserSessionService) {}
+  constructor(
+    public session: UserSessionService,
+    private details: UserDetailsService
+  ) {}
 
   public isCurrentSessionValid(): boolean {
     return this.session.getSessionToken() != "";
@@ -28,5 +33,6 @@ export class AppComponent {
 
   public disconnectCurrentSession(): void {
     this.session.disconnect();
+    this.details.clearDetails();
   }
 }

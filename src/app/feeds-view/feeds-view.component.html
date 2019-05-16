@@ -13,7 +13,11 @@
               <mat-panel-description class="right-content">
                 Last updated: {{ feed.autoUpdatedDate | date: "medium" }}
               </mat-panel-description>
-              <button mat-icon-button (click)="setAsPreferred()">
+              <button
+                mat-icon-button
+                *ngIf="isAuthenticated()"
+                (click)="togglePreferred(feed.uuid)"
+              >
                 <mat-icon *ngIf="!isPreferred(feed.uuid)"
                   >bookmark_border</mat-icon
                 >
