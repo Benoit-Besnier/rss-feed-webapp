@@ -1,0 +1,26 @@
+.vertical-padding {
+  margin: 10px 0;
+}
+
+.list-container {
+  min-height: inherit;
+}
+
+.title-font-size {
+  font-size: 30px;
+}
+
+.neutral-link {
+  text-decoration: none;
+  color: #4a4a4a;
+}
+.neutral-link:active,
+.neutral-link:focus {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
+.link-font-size {
+  font-size: 22px;
+}

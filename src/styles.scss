@@ -44,6 +44,11 @@ body {
   box-sizing: border-box;
 }
 
+div.no-height::before,
+div.no-height::after {
+  height: auto;
+}
+
 /**
  ** Login / Register forms mutual styles
  **/

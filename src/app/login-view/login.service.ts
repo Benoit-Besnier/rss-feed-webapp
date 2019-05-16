@@ -8,6 +8,8 @@ import { UserSession } from "../entities/UserSession";
   providedIn: "root"
 })
 export class LoginClientService {
+  private url = "http://localhost:80/auth/signin";
+
   constructor(private http: HttpClient) {}
 
   public getLoginResponse(
@@ -18,7 +20,7 @@ export class LoginClientService {
     this.setDefaultHeaders(headers);
 
     return this.http.post<UserSession>(
-      "http://localhost:80/auth/signin",
+      this.url,
       {
         username: username,
         password: password

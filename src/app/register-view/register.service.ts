@@ -7,6 +7,8 @@ import { Observable } from "rxjs/internal/Observable";
   providedIn: "root"
 })
 export class RegisterClientService {
+  private url = "http://localhost:80/auth/register";
+
   constructor(private http: HttpClient) {}
 
   public getRegisterResponse(
@@ -17,7 +19,7 @@ export class RegisterClientService {
     this.setDefaultHeaders(headers);
 
     return this.http.post<any>(
-      "http://localhost:80/auth/register",
+      this.url,
       {
         username: username,
         password: password

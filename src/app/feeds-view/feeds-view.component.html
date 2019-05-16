@@ -3,16 +3,24 @@
     <div class="vertical-padding">
       <mat-expansion-panel class="feed-item" *ngFor="let feed of feeds">
         <mat-expansion-panel-header>
-          <mat-panel-title class="bigger-title"
-            ><a
-              class="neutral-color-link"
-              [routerLink]="['/feeds/', feed.uuid]"
-              >{{ feed.title }}</a
-            ></mat-panel-title
-          >
-          <mat-panel-description class="right-content">
-            Last updated: {{ feed.autoUpdatedDate | date: "medium" }}
-          </mat-panel-description>
+          <div class="tweek-header">
+            <mat-panel-title class="bigger-title"
+              ><a class="neutral-link" [routerLink]="['/feeds/', feed.uuid]">{{
+                feed.title
+              }}</a></mat-panel-title
+            >
+            <div class="right-content">
+              <mat-panel-description class="right-content">
+                Last updated: {{ feed.autoUpdatedDate | date: "medium" }}
+              </mat-panel-description>
+              <button mat-icon-button (click)="setAsPreferred()">
+                <mat-icon *ngIf="!isPreferred(feed.uuid)"
+                  >bookmark_border</mat-icon
+                >
+                <mat-icon *ngIf="isPreferred(feed.uuid)">bookmark</mat-icon>
+              </button>
+            </div>
+          </div>
         </mat-expansion-panel-header>
         <div
           class="last-entries"

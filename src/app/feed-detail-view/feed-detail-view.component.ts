@@ -28,7 +28,6 @@ export class FeedDetailViewComponent implements OnInit {
         .subscribe(
           (feed: Feed) => {
             this.feed = feed;
-            console.log(feed);
           },
           (error: HttpErrorResponse) => console.log(error)
         );

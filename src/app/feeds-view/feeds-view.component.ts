@@ -1,8 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
+import { MatSnackBar } from "@angular/material";
+
 import { FeedsClientService } from "../client/feeds.service";
+
 import { Feed } from "../entities/Feed";
+import { UserDetailsService } from "../services/user-details.service";
 
 @Component({
   selector: "app-feeds-view",
@@ -12,7 +16,11 @@ import { Feed } from "../entities/Feed";
 export class FeedsViewComponent implements OnInit {
   private feeds: Feed[] = [];
 
-  constructor(private feedsClient: FeedsClientService) {}
+  constructor(
+    private feedsClient: FeedsClientService,
+    private details: UserDetailsService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.updateFeeds();
@@ -24,9 +32,18 @@ export class FeedsViewComponent implements OnInit {
         this.feeds = feeds;
       },
       (error: HttpErrorResponse) => {
-        // Keep current content but push a snack to notify user
-        console.log(error);
+        this.snackBar.open("Couldn't get feeds.", "", { duration: 2000 });
+        console.error(error);
       }
     );
+  }
+
+  public isPreferred(uuid: string) {
+    let details = this.details.getDetails();
+
+    if (this.details.areDetailsValids(details)) {
+      return details.preferredFeeds.some(preferred => preferred == uuid);
+    }
+    return false;
   }
 }

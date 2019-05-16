@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpResponse, HttpHeaders } from "@angular/common/http";
+
 import { Observable } from "rxjs/internal/Observable";
 
 import { Feed } from "../entities/Feed";
@@ -14,17 +15,17 @@ export class FeedsClientService {
 
   public getAllFeeds(): Observable<Feed[]> {
     let headers = new HttpHeaders();
-    this.setDefaultHeaders(headers);
 
+    this.setDefaultHeaders(headers);
     return this.http.get<Feed[]>(this.url, { headers: headers });
   }
 
   public getFeed(id: string, token: string): Observable<Feed> {
     let headers = new HttpHeaders();
+
     this.setDefaultHeaders(headers);
     this.setAuthorizationHeader(headers, token);
-
-    return this.http.get<Feed>(this.url + "/" + id, { headers: headers });
+    return this.http.get<Feed>(`${this.url}/${id}`, { headers: headers });
   }
 
   private setDefaultHeaders(headers: HttpHeaders) {

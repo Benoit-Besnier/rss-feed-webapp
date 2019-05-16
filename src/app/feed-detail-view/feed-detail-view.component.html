@@ -1,3 +1,36 @@
-<p>
-  feed-detail-view works!
-</p>
+<div class="view no-height">
+  <mat-nav-list class="list-container">
+    <div class="vertical-padding">
+      <h1 mat-subheader class="title-font-size">{{ feed?.title }}</h1>
+      <mat-list-item *ngFor="let entry of feed?.entries">
+        <mat-icon mat-list-icon>subject</mat-icon>
+        <a
+          mat-line
+          class="neutral-link link-font-size"
+          href="{{ entry.uri }}"
+          target="_blank"
+          >{{ entry.title }}</a
+        >
+        <a
+          mat-line
+          class="neutral-link link-font-size"
+          href="{{ entry.uri }}"
+          target="_blank"
+        >
+          Published at
+          {{
+            entry.publishedDate !== null
+              ? (entry.publishedDate | date: "medium")
+              : "some times 😕"
+          }}
+          and last updated at
+          {{
+            entry.publishedDate !== null
+              ? (entry.updatedDate | date: "medium")
+              : "some other times 😭"
+          }}
+        </a>
+      </mat-list-item>
+    </div>
+  </mat-nav-list>
+</div>
