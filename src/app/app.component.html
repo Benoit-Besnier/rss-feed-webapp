@@ -3,6 +3,9 @@
 <mat-toolbar color="primary" id="toolbar">
   <a mat-button id="toolbar-title" routerLink=".">Feaded</a>
   <span id="toolbar-remaining-space"></span>
+  <button *ngIf="isAuthenticated()" mat-icon-button (click)="openDialog()">
+    <mat-icon>add_box</mat-icon>
+  </button>
   <a *ngIf="!isCurrentSessionValid()" mat-icon-button routerLink="/login"
     ><mat-icon class="material-icons-outlined">account_circle</mat-icon></a
   >
