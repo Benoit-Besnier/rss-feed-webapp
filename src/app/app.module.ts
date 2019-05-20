@@ -19,6 +19,7 @@ import { LoginViewComponent } from "./login-view/login-view.component";
 import { RegisterViewComponent } from "./register-view/register-view.component";
 import { FeedsViewComponent } from "./feeds-view/feeds-view.component";
 import { FeedDetailViewComponent } from "./feed-detail-view/feed-detail-view.component";
+import { PreferredFeedViewComponent } from './preferred-feed-view/preferred-feed-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FeedDetailViewComponent } from "./feed-detail-view/feed-detail-view.com
     LoginViewComponent,
     RegisterViewComponent,
     FeedsViewComponent,
-    FeedDetailViewComponent
+    FeedDetailViewComponent,
+    PreferredFeedViewComponent
   ],
   imports: [
     // Angular default

@@ -1,0 +1,36 @@
+.vertical-padding {
+  margin: 10px 0;
+}
+
+.list-container {
+  min-height: inherit;
+}
+
+.feed-item {
+  margin: 5px 8px;
+}
+
+.tweek-header {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  overflow: hidden;
+  height: 60px;
+  align-items: center;
+}
+
+.bigger-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.right-content {
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+}
+
+.neutral-link {
+  text-decoration: none;
+  color: #606060;
+}

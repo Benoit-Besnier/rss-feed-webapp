@@ -11,7 +11,7 @@
       <mat-icon [matMenuTriggerFor]="user">account_circle</mat-icon>
     </a>
     <mat-menu #user="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item routerLink="/my-feeds">
         <mat-icon>face</mat-icon>
         <span>{{ getCurrentSessionUsername() }}</span>
       </button>

@@ -1,0 +1,41 @@
+<div class="view no-height">
+  <mat-accordion class="list-container">
+    <div class="vertical-padding">
+      <mat-expansion-panel
+        class="feed-item"
+        *ngFor="let feed of preferredFeeds"
+      >
+        <mat-expansion-panel-header>
+          <div class="tweek-header">
+            <mat-panel-title class="bigger-title"
+              ><a class="neutral-link" [routerLink]="['/feeds/', feed.uuid]">{{
+                feed.title
+              }}</a></mat-panel-title
+            >
+            <div class="right-content">
+              <mat-panel-description class="right-content">
+                Last updated: {{ feed.autoUpdatedDate | date: "medium" }}
+              </mat-panel-description>
+              <button
+                mat-icon-button
+                *ngIf="isAuthenticated()"
+                (click)="togglePreferred(feed.uuid)"
+              >
+                <mat-icon *ngIf="!isPreferred(feed.uuid)"
+                  >bookmark_border</mat-icon
+                >
+                <mat-icon *ngIf="isPreferred(feed.uuid)">bookmark</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel-header>
+        <div
+          class="last-entries"
+          *ngFor="let entry of (feed.entries | slice: 0:3)"
+        >
+          <a href="{{entry.uri}}">{{ entry.title }}</a>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+</div>
