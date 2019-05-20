@@ -54,11 +54,15 @@ export class FeedsViewComponent implements OnInit {
   }
 
   public togglePreferred(uuid: string): void {
+    let remove: boolean;
+
     if (this.isPreferred(uuid)) {
       this.details.deleteInPreferred(uuid);
+      remove = true;
     } else {
       this.details.addInPreferred(uuid);
+      remove = false;
     }
-    this.details.update();
+    this.details.update(uuid, remove);
   }
 }

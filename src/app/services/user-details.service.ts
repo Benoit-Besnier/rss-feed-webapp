@@ -28,20 +28,24 @@ export class UserDetailsService {
       },
       (error: HttpErrorResponse) => {
         this.snackBar.open("Couldn't get user details", "", { duration: 2000 });
-        console.error(error);
       }
     );
   }
 
-  public update(): void {
+  public update(uuid: string, remove: boolean): void {
     this.userClient
       .putUserDetails(this.sessionClient.getSessionToken(), this.details)
       .subscribe(
         (response: HttpResponse<any>) => {
-          console.log(response);
+          this.snackBar.open("Preferences are updated.", "", {
+            duration: 2000
+          });
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
+          this.snackBar.open("Preferences couldn't be updated. Rollback.", "", {
+            duration: 2000
+          });
+          remove ? this.addInPreferred(uuid) : this.deleteInPreferred(uuid);
         }
       );
   }
