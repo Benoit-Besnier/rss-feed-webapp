@@ -39,6 +39,12 @@ export class FeedsClientService {
     );
   }
 
+  public deleteFeed(uuid: string, token: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${uuid}`, {
+      headers: this.getAuthentiticationHttpHeaders(token)
+    });
+  }
+
   private getAuthentiticationHttpHeaders(token: string): HttpHeaders {
     return this.getBasicHttpHeaders().set("Authorization", `Bearer ${token}`);
   }

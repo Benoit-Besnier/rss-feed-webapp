@@ -61,6 +61,10 @@ export class UserDetailsService {
     this.details.preferredFeeds.push(uuid);
   }
 
+  public isAdmin(): boolean {
+    return this.details.roles.some(roles => roles == "ROLE_ADMIN");
+  }
+
   public getDetails(): UserDetails {
     return this.details;
   }

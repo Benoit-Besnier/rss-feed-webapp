@@ -18,12 +18,14 @@ import {
 } from "@angular/material/dialog";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent, DialogAddFeedComponent } from "./app.component";
+import { AppComponent } from "./app.component";
 import { LoginViewComponent } from "./login-view/login-view.component";
 import { RegisterViewComponent } from "./register-view/register-view.component";
 import { FeedsViewComponent } from "./feeds-view/feeds-view.component";
 import { FeedDetailViewComponent } from "./feed-detail-view/feed-detail-view.component";
 import { PreferredFeedViewComponent } from "./preferred-feed-view/preferred-feed-view.component";
+import { DialogAddFeedComponent } from "./dialog-add-feed/dialog-add-feed.component";
+import { DialogConfirmComponent } from "./dialog-confirm/dialog-confirm.component";
 
 @NgModule({
   declarations: [
@@ -33,9 +35,10 @@ import { PreferredFeedViewComponent } from "./preferred-feed-view/preferred-feed
     FeedsViewComponent,
     FeedDetailViewComponent,
     PreferredFeedViewComponent,
-    DialogAddFeedComponent
+    DialogAddFeedComponent,
+    DialogConfirmComponent
   ],
-  entryComponents: [DialogAddFeedComponent],
+  entryComponents: [DialogAddFeedComponent, DialogConfirmComponent],
   imports: [
     // Angular default
     BrowserModule,

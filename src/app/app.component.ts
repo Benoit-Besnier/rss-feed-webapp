@@ -5,17 +5,17 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatSnackBar
-} from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 
 import { UserSessionService } from "./services/user-session.service";
 import { UserDetailsService } from "./services/user-details.service";
 import { FeedsClientService } from "./client/feeds.service";
 import { AllFeedsUpdateTriggerService } from "./trigger/all-feeds-update-trigger.service";
+
+import {
+  DialogAddFeedComponent,
+  DialogAddFeedData
+} from "./dialog-add-feed/dialog-add-feed.component";
 
 import { UserSession } from "./entities/UserSession";
 
@@ -82,25 +82,5 @@ export class AppComponent {
         console.error(`Result is undefined.`);
       }
     });
-  }
-}
-
-export interface DialogAddFeedData {
-  feedUrl: string;
-}
-
-@Component({
-  selector: "dialog-add-feed-component",
-  templateUrl: "./dialog-add-feed/dialog-add-feed.component.html",
-  styleUrls: ["./dialog-add-feed/dialog-add-feed.component.scss"]
-})
-export class DialogAddFeedComponent {
-  constructor(
-    public dialogRef: MatDialogRef<AppComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogAddFeedData
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

@@ -1,14 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 
-import { MatSnackBar } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 
 import { FeedsClientService } from "../client/feeds.service";
 import { UserDetailsService } from "../services/user-details.service";
 import { UserSessionService } from "../services/user-session.service";
+import { AllFeedsUpdateTriggerService } from "../trigger/all-feeds-update-trigger.service";
+
+import { DialogConfirmComponent } from "../dialog-confirm/dialog-confirm.component";
 
 import { Feed } from "../entities/Feed";
-import { AllFeedsUpdateTriggerService } from "../trigger/all-feeds-update-trigger.service";
 
 @Component({
   selector: "app-feeds-view",
@@ -23,7 +25,8 @@ export class FeedsViewComponent implements OnInit {
     private session: UserSessionService,
     private details: UserDetailsService,
     private snackBar: MatSnackBar,
-    private allFeedsUpdateTrigger: AllFeedsUpdateTriggerService
+    private allFeedsUpdateTrigger: AllFeedsUpdateTriggerService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -60,6 +63,10 @@ export class FeedsViewComponent implements OnInit {
     return this.session.isSessionValid(this.session.getSession());
   }
 
+  public isAdmin(): boolean {
+    return this.details.isAdmin();
+  }
+
   public togglePreferred(uuid: string): void {
     let remove: boolean;
 
@@ -71,5 +78,23 @@ export class FeedsViewComponent implements OnInit {
       remove = false;
     }
     this.details.update(uuid, remove);
+  }
+
+  public remove(uuid: string) {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: "15vw",
+      data: "Do you confirm the deletion of this feed?"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(`Removing feed ${uuid}`);
+        this.feedsClient
+          .deleteFeed(uuid, this.session.getSessionToken())
+          .subscribe(any => {
+            this.updateFeeds();
+          });
+      }
+    });
   }
 }

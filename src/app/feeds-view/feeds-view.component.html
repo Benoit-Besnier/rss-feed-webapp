@@ -23,6 +23,13 @@
                 >
                 <mat-icon *ngIf="isPreferred(feed.uuid)">bookmark</mat-icon>
               </button>
+              <button
+                mat-icon-button
+                *ngIf="isAuthenticated() && isAdmin()"
+                (click)="remove(feed.uuid)"
+              >
+                <mat-icon>delete_forever</mat-icon>
+              </button>
             </div>
           </div>
         </mat-expansion-panel-header>
