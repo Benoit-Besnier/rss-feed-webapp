@@ -8,6 +8,7 @@ import { UserDetailsService } from "../services/user-details.service";
 import { UserSessionService } from "../services/user-session.service";
 
 import { Feed } from "../entities/Feed";
+import { AllFeedsUpdateTriggerService } from "../trigger/all-feeds-update-trigger.service";
 
 @Component({
   selector: "app-feeds-view",
@@ -21,11 +22,17 @@ export class FeedsViewComponent implements OnInit {
     private feedsClient: FeedsClientService,
     private session: UserSessionService,
     private details: UserDetailsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private allFeedsUpdateTrigger: AllFeedsUpdateTriggerService
   ) {}
 
   ngOnInit() {
     this.updateFeeds();
+    this.allFeedsUpdateTrigger.update.subscribe(validEvent => {
+      if (validEvent) {
+        this.updateFeeds();
+      }
+    });
   }
 
   public updateFeeds(): void {

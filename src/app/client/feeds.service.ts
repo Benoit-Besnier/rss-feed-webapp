@@ -14,26 +14,38 @@ export class FeedsClientService {
   constructor(private http: HttpClient) {}
 
   public getAllFeeds(): Observable<Feed[]> {
-    let headers = new HttpHeaders();
-
-    this.setDefaultHeaders(headers);
-    return this.http.get<Feed[]>(this.url, { headers: headers });
+    return this.http.get<Feed[]>(this.url, {
+      headers: this.getBasicHttpHeaders()
+    });
   }
 
   public getFeed(id: string, token: string): Observable<Feed> {
-    let headers = new HttpHeaders();
-
-    this.setDefaultHeaders(headers);
-    this.setAuthorizationHeader(headers, token);
-    return this.http.get<Feed>(`${this.url}/${id}`, { headers: headers });
+    return this.http.get<Feed>(`${this.url}/${id}`, {
+      headers: this.getAuthentiticationHttpHeaders(token)
+    });
   }
 
-  private setDefaultHeaders(headers: HttpHeaders) {
-    headers.append("Content-Type", "application/json");
-    headers.append("Access-Control-Allow-Origin", "*");
+  public postFeed(
+    urlFeed: string,
+    token: string
+  ): Observable<HttpResponse<any>> {
+    return this.http.post<any>(
+      this.url,
+      { url: urlFeed },
+      {
+        headers: this.getAuthentiticationHttpHeaders(token),
+        observe: "response"
+      }
+    );
   }
 
-  private setAuthorizationHeader(headers: HttpHeaders, token: string) {
-    headers.append("Authorization", `Bearer ${token}`);
+  private getAuthentiticationHttpHeaders(token: string): HttpHeaders {
+    return this.getBasicHttpHeaders().set("Authorization", `Bearer ${token}`);
+  }
+
+  private getBasicHttpHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .set("Content-Type", "application/json")
+      .set("Access-Control-Allow-Origin", "*");
   }
 }
